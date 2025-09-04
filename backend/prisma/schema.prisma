@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Workout {
+  id       String        @id @default(uuid())
+  date     DateTime
+  type     String
+  duration Int
+  notes    String?
+  status   WorkoutStatus @default(planned)
+}
+
+enum WorkoutStatus {
+  done
+  planned
+}
