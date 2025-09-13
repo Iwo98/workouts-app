@@ -1,11 +1,10 @@
 {
   "name": "frontend",
   "version": "1.0.0",
+  "author": "Iwo Brzyski",
+  "license": "MIT",
   "scripts": {
-    "type-check": "tsc --noEmit",
-    "lint": "oxlint ."
+    "type-check": "tsc --noEmit"
   },
-  "devDependencies": {
-    "oxlint": "^1.14.0"
-  }
+  "devDependencies": {}
 }

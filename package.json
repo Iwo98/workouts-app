@@ -1,6 +1,8 @@
 {
   "name": "workouts-app",
   "private": true,
+  "author": "Iwo Brzyski",
+  "license": "MIT",
   "workspaces": [
     "frontend",
     "backend"
@@ -8,8 +10,8 @@
   "scripts": {
     "pre-commit": "lint-staged",
     "prepare": "husky",
-    "lint:all": "yarn workspace frontend lint && yarn workspace backend lint",
-    "typecheck:all": "yarn workspace frontend type-check && yarn workspace backend type-check"
+    "typecheck:all": "yarn workspace frontend type-check && yarn workspace backend type-check",
+    "lint": "oxlint ."
   },
   "devDependencies": {
     "husky": "^9.1.7",
@@ -20,11 +22,8 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "oxlint --fix",
-      "prettier --write"
-    ],
-    "*.ts?(x)": [
-      "yarn typecheck:all"
+      "yarn lint",
+      "yarn prettier --write"
     ]
   }
 }

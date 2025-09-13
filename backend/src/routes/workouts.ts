@@ -14,8 +14,6 @@ router.get("/", async (_, res) => {
   const workouts = await prisma.workout.findMany();
 
   res.json(workouts);
-
-  console.log("ok");
 });
 
 // POST /api/workouts

@@ -10,7 +10,6 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "type-check": "tsc --noEmit",
-    "lint": "oxlint .",
     "clean": "rm -rf dist"
   },
   "nodemonConfig": {
@@ -32,7 +31,6 @@
     "@types/express": "^5.0.3",
     "@types/node": "^24.1.0",
     "nodemon": "^3.1.10",
-    "oxlint": "^1.14.0",
     "prisma": "^6.14.0",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
