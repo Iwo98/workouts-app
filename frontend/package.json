@@ -1,0 +1,11 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "lint": "oxlint ."
+  },
+  "devDependencies": {
+    "oxlint": "^1.14.0"
+  }
+}

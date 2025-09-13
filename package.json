@@ -1,0 +1,30 @@
+{
+  "name": "workouts-app",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "pre-commit": "lint-staged",
+    "prepare": "husky",
+    "lint:all": "yarn workspace frontend lint && yarn workspace backend lint",
+    "typecheck:all": "yarn workspace frontend type-check && yarn workspace backend type-check"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.6",
+    "oxlint": "^1.15.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "oxlint --fix",
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "yarn typecheck:all"
+    ]
+  }
+}
