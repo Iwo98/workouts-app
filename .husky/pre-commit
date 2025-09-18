@@ -1,0 +1,5 @@
+# Lint only staged files
+yarn lint-staged
+
+# Typecheck entire repo
+yarn typecheck:all

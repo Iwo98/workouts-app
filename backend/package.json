@@ -6,7 +6,11 @@
   "author": "Iwo Brzyski",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
   },
   "nodemonConfig": {
     "watch": [
