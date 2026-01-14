@@ -1,23 +1,55 @@
-import express from "express";
 import {
   workoutCreateSchema,
   workoutUpdateSchema,
   workoutPatchSchema,
 } from "@/types/workouts";
 import z from "zod";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/utils/db";
+import { AugmentedRequest, authenticateToken } from "../middleware/auth";
+
+import express, { Response } from "express";
 
 const router = express.Router();
 
 // GET /api/workouts
-router.get("/", async (_, res) => {
-  const workouts = await prisma.workout.findMany();
+router.get("/", authenticateToken, async (req: AugmentedRequest, res) => {
+  if (!req?.userId) {
+    return res.sendStatus(401);
+  }
 
-  res.json(workouts);
+  const workouts = await prisma.workout.findMany({
+    where: { userId: req.userId },
+  });
+
+  return res.json(workouts);
+});
+
+// GET /api/workouts/:id
+router.get("/:id", authenticateToken, async (req: AugmentedRequest, res) => {
+  const id = req.params.id.toString();
+  const userIdFromToken = req?.userId;
+
+  if (!userIdFromToken) {
+    return res.sendStatus(401);
+  }
+
+  const workout = await prisma.workout.findUnique({
+    where: { id, userId: userIdFromToken },
+  });
+
+  if (workout?.userId !== userIdFromToken) {
+    return res.sendStatus(401);
+  }
+
+  return res.json(workout);
 });
 
 // POST /api/workouts
-router.post("/", async (req, res) => {
+router.post("/", authenticateToken, async (req: AugmentedRequest, res) => {
+  if (!req?.userId) {
+    return res.sendStatus(401);
+  }
+
   const parsed = workoutCreateSchema.safeParse(req.body);
 
   if (!parsed.success) {
@@ -27,10 +59,14 @@ router.post("/", async (req, res) => {
     });
   }
 
-  // workoutsData.push(newWorkout);
-  const workout = await prisma.workout.create({
-    data: parsed.data,
-  });
+  // Ensure workout is always created for the authenticated user.
+  // Ignore any userId sent by the client and attach server-side.
+  const data = {
+    ...parsed.data,
+    userId: req.userId,
+  };
+
+  const workout = await prisma.workout.create({ data });
 
   return res.status(201).location(`/api/workouts/${workout.id}`).json(workout);
 });

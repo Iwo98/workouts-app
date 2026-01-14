@@ -4,16 +4,23 @@ export const workoutStatusEnum = z.enum(["done", "planned"]);
 
 export const workoutSchema = z
   .object({
+    createdAt: z.iso.datetime(),
     date: z.iso.datetime(),
-    type: z.string().min(1),
-    id: z.uuid(),
     duration: z.number().min(1),
+    id: z.uuid(),
+    type: z.string().min(1),
+    updatedAt: z.iso.datetime(),
     notes: z.string().optional(),
     status: workoutStatusEnum,
+    userId: z.uuid(),
   })
   .strict();
 
-export const workoutCreateSchema = workoutSchema.omit({ id: true });
+export const workoutCreateSchema = workoutSchema.omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
 export const workoutUpdateSchema = workoutCreateSchema;
 export const workoutPatchSchema = workoutUpdateSchema.partial();
 

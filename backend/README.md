@@ -30,13 +30,18 @@ yarn prisma generate
 
 ## Available Scripts
 
-### Development
+### DB Development
 
 - `yarn dev` - Start the development server with hot-reload
 - `yarn prisma generate` - Generate Prisma client
 - `yarn prisma migrate dev` - Create and apply a migration
 - `yarn prisma studio` - Open Prisma Studio to manage data
 - `yarn prisma db push` - Synchronizes your Prisma schema with your database schema without creating migrations.
+
+#### How to add changes to current DB models
+
+- `yarn prisma migrate dev --name "migration name"`
+- `yarn prisma generate` - it is crucial to generate prisma based on new migration
 
 ### Docker Commands
 
@@ -60,14 +65,21 @@ PostgreSQL database is accessible with these credentials:
 ```
 backend/
 ├── src/
-│   ├── server.ts        # Entry point
-│   ├── routes/          # API routes
-│   ├── controllers/     # Route controllers
-│   └── models/          # Data models
+│   ├── app.ts          # Express application setup
+│   ├── server.ts       # Server configuration and startup
+│   ├── routes/         # API routes definitions
+│   │   └── workouts.ts # Workouts routes
+│   ├── data/          # Mock/seed data
+│   │   └── workouts.ts # Sample workout data
+│   ├── lib/           # Shared utilities and libraries
+│   │   └── prisma.ts  # Prisma client instance
+│   └── types/         # TypeScript type definitions
+│       └── workouts.ts # Workout-related types
 ├── prisma/
-│   └── schema.prisma    # Database schema
-├── docker-compose.yaml  # Docker configuration
-└── package.json        # Project dependencies
+│   ├── schema.prisma   # Database schema
+│   └── migrations/     # Database migrations
+├── docker-compose.yaml # Docker configuration
+└── package.json       # Project dependencies
 ```
 
 ## Environment Variables
@@ -79,13 +91,29 @@ DATABASE_URL="postgresql://myuser:mypassword@localhost:5432/workout_db"
 PORT=3000
 ```
 
-## API Documentation
+## API Endpoints
 
-[Add API endpoints documentation here]
+### Workouts API
 
-## Contributing
+`GET /api/workouts`
 
-[Add contribution guidelines here]
+- Get all workouts
+
+`GET /api/workouts/:id`
+
+- Get specific workout
+
+`POST /api/workouts`
+
+- Create new workout
+
+`PUT /api/workouts/:id`
+
+- Update workout
+
+`DELETE /api/workouts/:id`
+
+- Delete workout
 
 ## License
 
