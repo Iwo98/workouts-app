@@ -44,6 +44,7 @@ router.post("/login", async (req, res) => {
       accessToken,
     });
   } catch (err) {
+    // oxlint-disable-next-line no-console
     console.error(err);
     return res.status(500).json({ message: "Internal server error" });
   }
@@ -86,6 +87,7 @@ router.post("/register", async (req, res) => {
       accessToken,
     });
   } catch (err) {
+    // oxlint-disable-next-line no-console
     console.error(err);
     return res.status(500).json({ message: "Internal server error" });
   }

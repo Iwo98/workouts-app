@@ -7,7 +7,7 @@ import z from "zod";
 import { prisma } from "@/utils/db";
 import { AugmentedRequest, authenticateToken } from "../middleware/auth";
 
-import express, { Response } from "express";
+import express from "express";
 
 const router = express.Router();
 
