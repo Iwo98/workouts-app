@@ -29,7 +29,6 @@ export const authenticateToken = (
       }
 
       req.userId = (decoded as AuthJwtPayload).userId;
-      console.log({ decoded });
       next();
     },
   );

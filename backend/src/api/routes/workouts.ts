@@ -46,7 +46,9 @@ router.get("/:id", authenticateToken, async (req: AugmentedRequest, res) => {
 
 // POST /api/workouts
 router.post("/", authenticateToken, async (req: AugmentedRequest, res) => {
-  if (!req?.userId) {
+  const userIdFromToken = req?.userId;
+
+  if (!userIdFromToken) {
     return res.sendStatus(401);
   }
 
@@ -63,17 +65,28 @@ router.post("/", authenticateToken, async (req: AugmentedRequest, res) => {
   // Ignore any userId sent by the client and attach server-side.
   const data = {
     ...parsed.data,
-    userId: req.userId,
+    userId: userIdFromToken,
   };
+  try {
+    const workout = await prisma.workout.create({ data });
 
-  const workout = await prisma.workout.create({ data });
-
-  return res.status(201).location(`/api/workouts/${workout.id}`).json(workout);
+    return res
+      .status(201)
+      .location(`/api/workouts/${workout.id}`)
+      .json(workout);
+  } catch (err) {
+    return res.status(404).json({ error: err });
+  }
 });
 
 // PUT api/workouts/:id
-router.put("/:id", async (req, res) => {
-  const id = req.params.id;
+router.put("/:id", authenticateToken, async (req: AugmentedRequest, res) => {
+  const id = req.params.id.toString();
+  const userIdFromToken = req?.userId;
+
+  if (!userIdFromToken) {
+    return res.sendStatus(401);
+  }
 
   const parsed = workoutUpdateSchema.safeParse(req.body);
   if (!parsed.success) {
@@ -84,7 +97,7 @@ router.put("/:id", async (req, res) => {
 
   try {
     const updated = await prisma.workout.update({
-      where: { id },
+      where: { id, userId: userIdFromToken },
       data: parsed.data,
     });
     return res.status(200).json(updated);
@@ -94,11 +107,16 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE api/workouts/:id
-router.delete("/:id", async (req, res) => {
-  const id = req.params.id;
+router.delete("/:id", authenticateToken, async (req: AugmentedRequest, res) => {
+  const id = req.params.id.toString();
+  const userIdFromToken = req?.userId;
+
+  if (!userIdFromToken) {
+    return res.sendStatus(401);
+  }
 
   try {
-    await prisma.workout.delete({ where: { id } });
+    await prisma.workout.delete({ where: { id, userId: userIdFromToken } });
     return res.status(204).send();
   } catch {
     return res.status(404).json({ error: "Workout not found" });
@@ -106,8 +124,13 @@ router.delete("/:id", async (req, res) => {
 });
 
 // PATCH api/workouts/:id
-router.patch("/:id", async (req, res) => {
-  const id = req.params.id;
+router.patch("/:id", authenticateToken, async (req: AugmentedRequest, res) => {
+  const id = req.params.id.toString();
+  const userIdFromToken = req?.userId;
+
+  if (!userIdFromToken) {
+    return res.sendStatus(401);
+  }
 
   const parsed = workoutPatchSchema.safeParse(req.body);
   if (!parsed.success) {
@@ -118,7 +141,7 @@ router.patch("/:id", async (req, res) => {
 
   try {
     const updated = await prisma.workout.update({
-      where: { id },
+      where: { id, userId: userIdFromToken },
       data: parsed.data,
     });
     return res.json(updated);
