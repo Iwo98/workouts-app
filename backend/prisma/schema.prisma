@@ -7,13 +7,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id            String         @id @unique @default(uuid())
+  email         String         @unique
+  password      String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  refreshTokens RefreshToken[]
+  workouts      Workout[]
+}
+
+model RefreshToken {
+  id          String   @id @unique @default(uuid())
+  hashedToken String   @unique
+  userId      String
+  revoked     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  expireAt    DateTime
+  User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model Workout {
-  id       String        @id @default(uuid())
-  date     DateTime
-  type     String
-  duration Int
-  notes    String?
-  status   WorkoutStatus @default(planned)
+  id        String        @id @default(uuid())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  date      DateTime
+  type      String
+  duration  Int
+  notes     String?
+  status    WorkoutStatus @default(planned)
+  userId    String
+  user      User          @relation(fields: [userId], references: [id])
 }
 
 enum WorkoutStatus {
