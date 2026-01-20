@@ -1,13 +1,12 @@
+import z from "zod";
+import { prisma } from "@backend/utils/db";
+import { AugmentedRequest, authenticateToken } from "../middleware/auth";
+import express from "express";
 import {
   workoutCreateSchema,
   workoutUpdateSchema,
   workoutPatchSchema,
-} from "@/types/workouts";
-import z from "zod";
-import { prisma } from "@/utils/db";
-import { AugmentedRequest, authenticateToken } from "../middleware/auth";
-
-import express from "express";
+} from "@common/types/workouts";
 
 const router = express.Router();
 

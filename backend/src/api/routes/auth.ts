@@ -1,9 +1,9 @@
-import { generateTokens } from "@/utils/auth/jwt";
+import { generateTokens } from "@backend/utils/auth/jwt";
 import z from "zod";
 import { findUserByEmail } from "../contollers/user";
 import bcrypt from "bcrypt";
-import { prisma } from "@/utils/db";
-import { authenticateSchema } from "@/types/auth";
+import { prisma } from "@backend/utils/db";
+import { authenticateSchema } from "@backend/types/auth";
 
 import { Router } from "express";
 

@@ -7,7 +7,7 @@
     "moduleResolution": "node16",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "jsx": "react-jsx",
-    // "baseUrl": ".",
+    "baseUrl": ".",
     "allowJs": true,
     "esModuleInterop": true,
     "noFallthroughCasesInSwitch": true,

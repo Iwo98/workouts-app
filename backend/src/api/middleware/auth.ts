@@ -1,5 +1,5 @@
 // oxlint-disable no-console
-import { AuthJwtPayload } from "@/types/jwtPayload";
+import { AuthJwtPayload } from "@backend/types/jwtPayload";
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 

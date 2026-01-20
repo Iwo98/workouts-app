@@ -3,9 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@frontend/*": ["src/*"],
-      "@common/*": ["../common/src/*"]
+      "@common/*": ["src/*"]
     }
   },
-  "include": ["./", "../common"]
+  "include": ["./"]
 }

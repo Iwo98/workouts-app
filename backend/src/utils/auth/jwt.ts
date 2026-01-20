@@ -1,14 +1,16 @@
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import { User } from "@/types/user";
-import { AuthJwtPayload } from "@/types/jwtPayload";
+import { AuthJwtPayload } from "@backend/types/jwtPayload";
+import { User } from "@common/types/user";
 
 export const generateAccessToken = (user: User) => {
   const payload: AuthJwtPayload = {
     userId: user.id,
   };
 
-  return jwt.sign(payload, process.env.JWT_ACCESS_SECRET || "secret_key");
+  return jwt.sign(payload, process.env.JWT_ACCESS_SECRET || "secret_key", {
+    expiresIn: "2h",
+  });
 };
 
 export const generateRefreshToken = () => {
