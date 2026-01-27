@@ -1,6 +1,6 @@
 import { generateTokens } from "@backend/utils/auth/jwt";
 import z from "zod";
-import { findUserByEmail } from "../contollers/user";
+import { findUserByEmail } from "../services/user";
 import bcrypt from "bcrypt";
 import { prisma } from "@backend/utils/db";
 import { authenticateSchema } from "@backend/types/auth";

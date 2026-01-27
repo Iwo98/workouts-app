@@ -1,4 +1,3 @@
-// oxlint-disable no-console
 import { AuthJwtPayload } from "@backend/types/jwtPayload";
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
@@ -23,7 +22,6 @@ export const authenticateToken = (
     token,
     process.env.JWT_ACCESS_SECRET || "secret_key",
     (err, decoded) => {
-      console.log(err);
       if (err) {
         res.sendStatus(403);
         return;
