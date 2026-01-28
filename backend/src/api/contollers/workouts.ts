@@ -8,12 +8,7 @@ import {
   workoutUpdateSchema,
 } from "@common/types/workouts";
 
-type WorkoutController = (
-  req: AugmentedRequest,
-  res: Response,
-) => Promise<Response<any, Record<string, any>>>;
-
-export const getAllWorkouts: WorkoutController = async (req, res) => {
+export const getAllWorkouts = async (req: AugmentedRequest, res: Response) => {
   const userIdFromToken = req?.userId;
 
   if (!userIdFromToken) {
@@ -32,7 +27,7 @@ export const getAllWorkouts: WorkoutController = async (req, res) => {
   }
 };
 
-export const getWorkoutById: WorkoutController = async (req, res) => {
+export const getWorkoutById = async (req: AugmentedRequest, res: Response) => {
   const workoutId = req.params.id.toString();
   const userIdFromToken = req?.userId;
 
@@ -58,7 +53,7 @@ export const getWorkoutById: WorkoutController = async (req, res) => {
   }
 };
 
-export const createWorkout: WorkoutController = async (req, res) => {
+export const createWorkout = async (req: AugmentedRequest, res: Response) => {
   const userIdFromToken = req?.userId;
 
   if (!userIdFromToken) {
@@ -93,7 +88,7 @@ export const createWorkout: WorkoutController = async (req, res) => {
   }
 };
 
-export const updateWorkout: WorkoutController = async (req, res) => {
+export const updateWorkout = async (req: AugmentedRequest, res: Response) => {
   const workoutId = req.params.id.toString();
   const userIdFromToken = req?.userId;
 
@@ -134,7 +129,7 @@ export const updateWorkout: WorkoutController = async (req, res) => {
   }
 };
 
-export const deleteWorkout: WorkoutController = async (req, res) => {
+export const deleteWorkout = async (req: AugmentedRequest, res: Response) => {
   const workoutId = req.params.id.toString();
   const userIdFromToken = req?.userId;
 

@@ -1,4 +1,5 @@
 import workoutsRouter from "./routes/workouts";
+import workoutExerciseRouter from "./routes/workoutExercise";
 import authRouter from "./routes/auth";
 import express, { Application } from "express";
 
@@ -6,6 +7,7 @@ const app: Application = express();
 
 app.use(express.json());
 app.use("/api/workouts", workoutsRouter);
+app.use("/api/workout-exercise", workoutExerciseRouter);
 app.use("/api/auth", authRouter);
 
 // TODO Error handling middleware
