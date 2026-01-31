@@ -11,3 +11,16 @@ export const setSchema = z
   .strict();
 
 export type Set = z.infer<typeof setSchema>;
+
+export const setCreateSchema = setSchema.omit({
+  id: true,
+  createdAt: true,
+});
+
+export const setUpdateSchema = setSchema
+  .omit({
+    id: true,
+    createdAt: true,
+    workoutExerciseId: true,
+  })
+  .partial();
