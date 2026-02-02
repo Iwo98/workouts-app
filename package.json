@@ -5,20 +5,21 @@
   "license": "MIT",
   "workspaces": [
     "frontend",
-    "backend"
+    "backend",
+    "common"
   ],
   "scripts": {
-  "pre-commit": "lint-staged",
-  "prepare": "husky",
-  "typecheck:all": "yarn workspace frontend type-check && yarn workspace backend type-check",
-  "lint": "oxlint . --max-warnings 0"
+    "pre-commit": "lint-staged",
+    "prepare": "husky",
+    "typecheck:all": "yarn workspace frontend type-check && yarn workspace backend type-check  && yarn workspace common type-check",
+    "lint": "oxlint . --max-warnings 0"
   },
   "devDependencies": {
     "husky": "^9.1.7",
     "lint-staged": "^16.1.6",
     "oxlint": "^1.15.0",
     "prettier": "^3.6.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.3"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

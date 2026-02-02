@@ -1,6 +1,6 @@
 import z from "zod";
 import { refreshTokenSchema } from "./refreshToken";
-import { transformDatesSchema } from "@/utils/transfromDates";
+import { transformDatesSchema } from "@common/utils/transfromDates";
 import { workoutSchema } from "./workouts";
 
 export const userSchema = z

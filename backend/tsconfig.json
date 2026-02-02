@@ -3,8 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@backend/*": ["src/*"],
+      "@common/*": ["../common/src/*"]
     }
   },
-  "include": ["./"]
+  "include": ["./", "../common"]
 }
