@@ -1,4 +1,4 @@
--- CreateTable
+r-- CreateTable
 CREATE TABLE "public"."Workout" (
     "id" SERIAL NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
