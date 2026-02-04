@@ -6,7 +6,7 @@ import z from "zod";
 import {
   workoutCreateSchema,
   workoutUpdateSchema,
-} from "@common/types/workouts";
+} from "@common/types/workout";
 
 export const getAllWorkouts = async (req: AugmentedRequest, res: Response) => {
   const userIdFromToken = req?.userId;

@@ -1,5 +1,5 @@
 import { prisma } from "@backend/utils/db";
-import { type WorkoutCreate, type WorkoutUpdate } from "@common/types/workouts";
+import { type WorkoutCreate, type WorkoutUpdate } from "@common/types/workout";
 
 interface GetWorkoutsServicePayload {
   userId: string;
