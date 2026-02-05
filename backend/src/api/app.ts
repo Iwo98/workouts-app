@@ -3,7 +3,8 @@ import exercisesRouter from "./routes/exercises";
 import workoutExerciseRouter from "./routes/workoutExercise";
 import setsRouter from "./routes/sets";
 import authRouter from "./routes/auth";
-import express, { Application } from "express";
+import type { Application } from "express";
+import express from "express";
 
 const app: Application = express();
 

@@ -1,4 +1,4 @@
-import { Response } from "express";
+import type { Response } from "express";
 import * as service from "@backend/api/services/workoutExercise";
 import type { AugmentedRequest } from "../middleware/auth";
 import z from "zod";

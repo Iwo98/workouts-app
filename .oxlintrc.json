@@ -1,5 +1,8 @@
 {
+  "plugins": ["import", "typescript", "eslint", "oxc", "vue"],
   "rules": {
-    "no-console": "warn"
+    "no-console": "warn",
+    "consistent-type-imports": "warn",
+    "no-unused-vars": "warn"
   }
 }

@@ -1,4 +1,4 @@
-import { Response } from "express";
+import type { Response } from "express";
 import * as service from "@backend/api/services/sets";
 import type { AugmentedRequest } from "../middleware/auth";
 import { setCreateSchema, setUpdateSchema } from "@common/types/set";
