@@ -1,6 +1,6 @@
 // routes/workout-exercises.ts
 import { Router } from "express";
-import { authenticateToken } from "@backend/api/middleware/auth";
+import { authenticateToken } from "@backend/api/middleware/authenticateToken";
 import * as controllers from "@backend/api/contollers/workoutExercise";
 
 const router = Router();

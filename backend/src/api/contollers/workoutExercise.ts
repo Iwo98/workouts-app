@@ -1,6 +1,6 @@
 import type { Response } from "express";
 import * as service from "@backend/api/services/workoutExercise";
-import type { AugmentedRequest } from "../middleware/auth";
+import type { AugmentedRequest } from "../middleware/authenticateToken";
 import z from "zod";
 import { workoutExerciseCreateSchema } from "@common/types/workoutExercise";
 

@@ -3,6 +3,7 @@
   "rules": {
     "no-console": "warn",
     "consistent-type-imports": "warn",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "object-shorthand": "error"
   }
 }

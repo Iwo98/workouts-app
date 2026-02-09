@@ -1,5 +1,5 @@
 import type { Response } from "express";
-import type { AugmentedRequest } from "../middleware/auth";
+import type { AugmentedRequest } from "../middleware/authenticateToken";
 import { prisma } from "@backend/utils/db";
 import * as service from "@backend/api/services/workouts";
 import z from "zod";

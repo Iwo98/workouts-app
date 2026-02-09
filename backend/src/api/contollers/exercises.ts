@@ -1,5 +1,5 @@
 import type { Response } from "express";
-import type { AugmentedRequest } from "../middleware/auth";
+import type { AugmentedRequest } from "../middleware/authenticateToken";
 import * as service from "@backend/api/services/exercises";
 
 export const getAllExercises = async (req: AugmentedRequest, res: Response) => {

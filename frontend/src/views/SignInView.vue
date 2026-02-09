@@ -1,49 +1,52 @@
 <script setup lang="ts">
-import TheWelcome from "@frontend/components/ui/theWelcome/TheWelcome.vue";
-import { RouterLink, RouterView } from "vue-router";
 import { Button } from "@frontend/components/ui/button";
-import { ref } from "vue";
 import { useForm } from "vee-validate";
-import { toTypedSchema } from "@vee-validate/zod";
-import * as z from "zod";
+import { authenticateSchema } from "@common/types/auth";
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@frontend/components/ui/form";
+import { api } from "@frontend/lib/api/axios";
+import { useRouter } from "vue-router";
+import { toTypedSchema } from "@vee-validate/zod";
 
-const formSchema = toTypedSchema(
-  z.object({
-    username: z.string().min(2).max(50),
-    password: z.string().min(2).max(50),
-  }),
-);
+const router = useRouter();
+
 const form = useForm({
-  validationSchema: formSchema,
+  validationSchema: toTypedSchema(authenticateSchema),
+  initialValues: { email: "", password: "" },
 });
 
-const onSubmit = form.handleSubmit((values) => {
-  // oxlint-disable-next-line no-console
-  console.log("Form submitted!", values);
+const onSubmit = form.handleSubmit(async (values) => {
+  try {
+    await api.post("auth/register", {
+      email: values.email,
+      password: values.password,
+    });
+
+    router.push("/dashboard");
+  } catch {
+    // TODO
+  }
 });
 </script>
 
 <template>
   <div class="flex gap-3 flex-col items-start p-4">
-    <h1 class="fill-primary">Log in</h1>
+    <h1 class="fill-primary">Sign in</h1>
     <div class="w-full">
       <form @submit="onSubmit">
-        <FormField v-slot="{ field }" name="username">
+        <FormField v-slot="{ field }" name="email">
           <FormItem class="w-full gap-1 mb-2">
-            <FormLabel>Username</FormLabel>
+            <FormLabel>E-mail</FormLabel>
             <FormControl class="rounded-xs border-2 border-tertiary w-full">
               <Input
                 required
                 class="p-1"
-                placeholder="Username"
+                placeholder="Your e-mail"
                 v-bind="field"
               />
             </FormControl>
@@ -66,9 +69,9 @@ const onSubmit = form.handleSubmit((values) => {
           </FormItem>
         </FormField>
         <Button as="button" type="submit" size="default" class="w-full mt-2"
-          >Log in</Button
+          >Sign in</Button
         >
-      </Form>
+      </form>
     </div>
   </div>
 </template>

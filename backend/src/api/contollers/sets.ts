@@ -1,6 +1,6 @@
 import type { Response } from "express";
 import * as service from "@backend/api/services/sets";
-import type { AugmentedRequest } from "../middleware/auth";
+import type { AugmentedRequest } from "../middleware/authenticateToken";
 import { setCreateSchema, setUpdateSchema } from "@common/types/set";
 import z from "zod";
 
