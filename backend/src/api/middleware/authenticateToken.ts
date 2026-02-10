@@ -1,5 +1,5 @@
-import { AuthJwtPayload } from "@backend/types/jwtPayload";
-import { Request, Response, NextFunction } from "express";
+import type { AuthJwtPayload } from "@backend/types/jwtPayload";
+import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
 export interface AugmentedRequest extends Request {
@@ -11,9 +11,8 @@ export const authenticateToken = (
   res: Response,
   next: NextFunction,
 ): void => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
-  if (token == null) {
+  const token = req.cookies?.accessToken as string;
+  if (!token) {
     res.sendStatus(401);
     return;
   }

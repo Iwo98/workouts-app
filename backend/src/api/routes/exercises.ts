@@ -1,4 +1,4 @@
-import { authenticateToken } from "../middleware/auth";
+import { authenticateToken } from "../middleware/authenticateToken";
 import express from "express";
 import * as controllers from "../contollers/exercises";
 

@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import { AuthJwtPayload } from "@backend/types/jwtPayload";
-import { User } from "@common/types/user";
+import type { AuthJwtPayload } from "@backend/types/jwtPayload";
+import type { User } from "@common/types/user";
 
 export const generateAccessToken = (user: User) => {
   const payload: AuthJwtPayload = {

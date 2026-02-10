@@ -1,11 +1,22 @@
 {
   "extends": "../tsconfig.base.json",
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@frontend/*": ["src/*"],
+      "@frontend/*": ["./src/*"],
       "@common/*": ["../common/src/*"]
     }
-  },
-  "include": ["./", "../common"]
+  }
 }

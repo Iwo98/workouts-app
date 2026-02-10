@@ -1,12 +1,12 @@
 import type { Response } from "express";
-import type { AugmentedRequest } from "../middleware/auth";
+import type { AugmentedRequest } from "../middleware/authenticateToken";
 import { prisma } from "@backend/utils/db";
 import * as service from "@backend/api/services/workouts";
 import z from "zod";
 import {
   workoutCreateSchema,
   workoutUpdateSchema,
-} from "@common/types/workouts";
+} from "@common/types/workout";
 
 export const getAllWorkouts = async (req: AugmentedRequest, res: Response) => {
   const userIdFromToken = req?.userId;
