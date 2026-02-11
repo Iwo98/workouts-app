@@ -97,24 +97,6 @@ const workouts = ref<MockWorkout[]>([
       },
     ],
   },
-  {
-    id: "w4",
-    name: "Metcon Circuit",
-    date: "2026-02-03T07:00:00.000Z",
-    exercises: [
-      { name: "Burpees", sets: [{ reps: 15, weight: "body" }] },
-      { name: "Kettlebell Swing", sets: [{ reps: 12, weight: "24kg" }] },
-    ],
-  },
-  {
-    id: "w5",
-    name: "Push / Pull",
-    date: "2026-01-30T19:45:00.000Z",
-    exercises: [
-      { name: "Rows", sets: [{ reps: 8, weight: "50kg" }] },
-      { name: "Dips", sets: [{ reps: 10, weight: "body" }] },
-    ],
-  },
 ]);
 
 const formatDate = (iso?: string) =>
@@ -127,13 +109,13 @@ const formatDate = (iso?: string) =>
     <div class="flex flex-col gap-3 mb-6">
       <Button variant="default" size="lg" class="w-full">Start workout</Button>
       <Button variant="secondary" size="lg" class="w-full">Plan Workout</Button>
-      <Button variant="ghost" size="lg" class="w-full"
+      <Button variant="link" size="lg" class="w-full"
         >See previous workouts</Button
       >
     </div>
 
     <!-- Last workouts section -->
-    <h4 class="text-lg font-medium mb-3">Your last 5 workouts</h4>
+    <h4 class="text-lg font-medium mb-3">Your last 3 workouts</h4>
     <div class="grid gap-3">
       <div
         v-for="workout in workouts"
@@ -156,7 +138,7 @@ const formatDate = (iso?: string) =>
               :key="exercise.name"
               class="grid gap-4 grid-cols-[minmax(0,_auto)_minmax(auto,_100%)]"
             >
-              <div class="text-xs text-muted-foreground truncate">
+              <div class="text-xs text-foreground truncate">
                 {{ exercise.name }}
               </div>
               <div class="flex gap-1 flex-wrap flex-row justify-end">
