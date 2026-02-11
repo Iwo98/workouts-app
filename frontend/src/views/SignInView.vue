@@ -12,6 +12,7 @@ import {
 import { api } from "@frontend/lib/api/axios";
 import { useRouter } from "vue-router";
 import { toTypedSchema } from "@vee-validate/zod";
+import { logIn, register } from "@frontend/lib/api/endpoints/auth";
 
 const router = useRouter();
 
@@ -20,12 +21,9 @@ const form = useForm({
   initialValues: { email: "", password: "" },
 });
 
-const onSubmit = form.handleSubmit(async (values) => {
+const onSubmit = form.handleSubmit(async ({ email, password }) => {
   try {
-    await api.post("auth/register", {
-      email: values.email,
-      password: values.password,
-    });
+    await register({ email, password });
 
     router.push("/dashboard");
   } catch {

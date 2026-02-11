@@ -88,3 +88,13 @@ export const register = async (req: AugmentedRequest, res: Response) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const getMe = async (req: AugmentedRequest, res: Response) => {
+  const userIdFromToken = req?.userId;
+
+  if (!userIdFromToken) {
+    return res.sendStatus(401);
+  }
+
+  return res.json({ message: "Logged in!" });
+};

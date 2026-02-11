@@ -12,6 +12,7 @@ import {
 import { api } from "@frontend/lib/api/axios";
 import { useRouter } from "vue-router";
 import { authenticateSchema } from "@common/types/auth";
+import { logIn } from "@frontend/lib/api/endpoints/auth";
 
 const router = useRouter();
 
@@ -22,10 +23,7 @@ const form = useForm({
 
 const onSubmit = form.handleSubmit(async ({ email, password }) => {
   try {
-    await api.post("auth/login", {
-      email: email,
-      password: password,
-    });
+    await logIn({ email, password });
 
     router.push("/dashboard");
   } catch {
